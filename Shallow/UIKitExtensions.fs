@@ -3,11 +3,18 @@ module MonoTouch.UIKit.Extensions
 
 open System.Drawing
 open MonoTouch.UIKit
+open MonoTouch.Foundation
 
 open Cirrious.FluentLayouts.Touch
 
-type UIImageView with
+type UIImage with
+    static member FromUrl(url) =
+        url
+        |> NSUrl.FromString
+        |> NSData.FromUrl
+        |> UIImage.LoadFromData
 
+type UIImageView with
     /// Adds a spinning spinner to the middle of the view
     member private this.DisplaySpinner () =
         let spinner = UIActivityIndicatorView(

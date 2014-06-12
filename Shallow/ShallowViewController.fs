@@ -34,11 +34,6 @@ type ShallowViewController() =
     let noButton = roundButton mainButtonSize "nope-icon.png" 1.0f
     let infoButton = roundButton infoButtonSize "info-icon.png" 1.0f
 
-    let downloadImage url = async {
-        let data = url |> NSUrl.FromString |> NSData.FromUrl
-        return UIImage.LoadFromData(data)
-    }
-
     let photoView =
         let view = UIImageView(
             ClipsToBounds = true,
@@ -85,7 +80,7 @@ type ShallowViewController() =
 
     override this.ViewDidLoad() =
         this.View <- content
-        photoView.ImageAsync <- downloadImage photoUrl
+        photoView.ImageAsync <- async { return UIImage.FromUrl(photoUrl) }
 
     override this.ViewWillAppear(animated: bool) =
         base.ViewWillAppear(animated)
