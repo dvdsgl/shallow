@@ -43,16 +43,13 @@ type ShallowViewController() as this =
             ClipsToBounds = true,
             UserInteractionEnabled = true,
             ContentMode = UIViewContentMode.ScaleAspectFit)
-        view.Image <- downloadImage photoUrl |> Async.RunSynchronously
         view
 
     let content =
-        let view = UIView(
-            BackgroundColor = UIColor.White)
+        let view = UIView(BackgroundColor = UIColor.White)
 
         view.AddSubviews(yesButton, noButton, infoButton, photoView)
         view.AddConstraints [|
-
             infoButton.Width().EqualTo(infoButtonSize)
             infoButton.Height().EqualTo(infoButtonSize)
             infoButton.WithSameBottom(view).Minus(buttonBottomSpacing)
@@ -87,6 +84,11 @@ type ShallowViewController() as this =
 
     override this.ViewDidLoad() =
         this.View <- content
+
+        Async.Start (async {
+            let! image = downloadImage photoUrl
+            this.InvokeOnMainThread(fun () -> photoView.Image <- image)
+        })
 
     override this.ViewWillAppear(animated: bool) =
         base.ViewWillAppear(animated)
