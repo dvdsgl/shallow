@@ -4,6 +4,7 @@ open System
 open System.Drawing
 
 open MonoTouch.UIKit
+
 open MonoTouch.Foundation
 open MonoTouch.CoreGraphics
 
@@ -84,11 +85,7 @@ type ShallowViewController() =
 
     override this.ViewDidLoad() =
         this.View <- content
-
-        Async.Start (async {
-            let! image = downloadImage photoUrl
-            this.InvokeOnMainThread(fun () -> photoView.Image <- image)
-        })
+        photoView.ImageAsync <- downloadImage photoUrl
 
     override this.ViewWillAppear(animated: bool) =
         base.ViewWillAppear(animated)

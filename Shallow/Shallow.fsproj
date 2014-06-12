@@ -115,6 +115,7 @@
     <None Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UIKitExtensions.fs" />
     <Compile Include="RoundButton.fs" />
     <Compile Include="SwipeGestureHandler.fs" />
     <Compile Include="ShallowViewController.fs" />
