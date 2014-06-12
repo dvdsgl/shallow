@@ -80,7 +80,6 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
                 animator.AddBehavior(UIGravityBehavior(targetView, Magnitude = 0.7f))
                 targetView.UserInteractionEnabled <- false
 
-
     do targetView.AddGestureRecognizer(UIPanGestureRecognizer(handlePan))
 
     member this.TargetViewRemoved = targetViewRemoved.Publish
