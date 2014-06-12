@@ -25,20 +25,17 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
         match gesture.State, attachment with
         | UIGestureRecognizerState.Began, _ ->
             animator.RemoveAllBehaviors()
-            startCenter <- targetView.Center
 
+            let anchor = gesture.LocationInView(referenceView)
             let offset =
                 let size = targetView.Bounds.Size
                 // calculate the center offset and anchor point
                 let pointWithinAnimatedView = gesture.LocationInView(targetView)
-                UIOffset(pointWithinAnimatedView.X - size.Width / 2.0f, pointWithinAnimatedView.Y- size.Height / 2.0f)
-            let anchor = gesture.LocationInView(referenceView)
+                UIOffset(pointWithinAnimatedView.X - size.Width / 2.0f, pointWithinAnimatedView.Y - size.Height / 2.0f)
 
-            // calculate angular velocity
+            startCenter <- targetView.Center
             lastTime <- DateTime.Now
             lastAngle <- angleOfView targetView
-
-            // create attachment behavior
             attachment <-
                 let attach = UIAttachmentBehavior(targetView, offset, anchor)
                 attach.Action <- fun () ->
@@ -57,7 +54,7 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
             attachment.AnchorPoint <- gesture.LocationInView(referenceView)
 
         | UIGestureRecognizerState.Ended, _ ->
-            animator.RemoveBehaviors()
+            animator.RemoveAllBehaviors()
             let velocity = gesture.VelocityInView(referenceView)
 
             // if we aren't dragging it down, just snap it back and quit

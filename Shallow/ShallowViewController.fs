@@ -39,9 +39,9 @@ type ShallowViewController() as this =
 
     let photoView =
         let view = UIImageView(
-            BackgroundColor = UIColor.Red,
+            ClipsToBounds = true,
             UserInteractionEnabled = true,
-            TranslatesAutoresizingMaskIntoConstraints = false)
+            ContentMode = UIViewContentMode.ScaleAspectFit)
         view.Image <- downloadImage photoUrl |> Async.RunSynchronously
         view
 
@@ -51,10 +51,6 @@ type ShallowViewController() as this =
 
         view.AddSubviews(yesButton, noButton, infoButton, photoView)
         view.AddConstraints [|
-            photoView.Width().EqualTo(photoSize)
-            photoView.Height().EqualTo(photoSize)
-            //photoView.WithSameCenterX(view)
-            //photoView.WithSameCenterY(view).Minus(50.0f)
 
             infoButton.Width().EqualTo(infoButtonSize)
             infoButton.Height().EqualTo(infoButtonSize)
@@ -77,6 +73,15 @@ type ShallowViewController() as this =
 
     override this.ViewDidLoad() =
         this.View <- content
+
+    override this.ViewWillAppear(animated: bool) =
+        base.ViewWillAppear(animated)
+
+        // photoView is controlled by dynamics, so we don't use auto layout
+        photoView.Frame <- RectangleF(
+            x = (content.Frame.Width - photoSize) / 2.0f,
+            y = (content.Frame.Height - photoSize) / 2.0f - 50.0f,
+            width = photoSize, height = photoSize)
 
     override this.ShouldAutorotateToInterfaceOrientation(orientation) =
         orientation <> UIInterfaceOrientation.PortraitUpsideDown
