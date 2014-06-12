@@ -22,8 +22,8 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
 
     let handlePan (gesture: UIPanGestureRecognizer) =
         let view, superview = gesture.View, gesture.View.Superview
-        match gesture.State with
-        | UIGestureRecognizerState.Began ->
+        match gesture.State, attachment with
+        | UIGestureRecognizerState.Began, _ ->
             animator.RemoveAllBehaviors()
             startCenter <- view.Center
 
@@ -52,12 +52,11 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
                 animator.Add(attach)
                 Some attach
 
-        | UIGestureRecognizerState.Changed ->
+        | UIGestureRecognizerState.Changed, Some attachment ->
             // as user makes gesture, update attachment behavior's anchor point, achieving drag 'n' rotate
-            attachment |> Option.iter (fun attachment ->
-                attachment.AnchorPoint <- gesture.LocationInView(superview))
+            attachment.AnchorPoint <- gesture.LocationInView(superview)
 
-        | UIGestureRecognizerState.Ended ->
+        | UIGestureRecognizerState.Ended, _ ->
             animator.RemoveBehaviors()
             let velocity = gesture.VelocityInView(superview)
 
