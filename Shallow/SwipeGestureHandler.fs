@@ -14,6 +14,8 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
     let mutable lastAngle = 0.0f
     let mutable angularVelocity = 0.0f
 
+    let targetViewRemoved = Event<_>()
+
     let animator = UIDynamicAnimator(referenceView)
 
     let angleOfView (view: #UIView) =
@@ -74,10 +76,15 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
                     if not (referenceView.Bounds.IntersectsWith(targetView.Frame)) then
                         animator.RemoveAllBehaviors()
                         targetView.RemoveFromSuperview()
+                        targetViewRemoved.Trigger(targetView)
                 
                 animator.AddBehavior(dynamic)
                 // add a little gravity so it accelerates off the screen (in case user gesture was slow)
                 animator.AddBehavior(UIGravityBehavior(targetView, Magnitude = 0.7f))
+                targetView.UserInteractionEnabled <- false
+
 
     do targetView.AddGestureRecognizer(UIPanGestureRecognizer(handlePan))
+
+    member this.TargetViewRemoved = targetViewRemoved.Publish
 

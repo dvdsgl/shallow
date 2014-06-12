@@ -5,6 +5,7 @@ open System.Drawing
 
 open MonoTouch.UIKit
 open MonoTouch.Foundation
+open MonoTouch.CoreGraphics
 
 open Cirrious.FluentLayouts.Touch
 
@@ -69,7 +70,20 @@ type ShallowViewController() as this =
         |]
         view
 
-    let swipeHandler = SwipeGestureHandler(content, photoView)
+    let resetPhotoView () =
+        photoView.UserInteractionEnabled <- true
+        photoView.Transform <- CGAffineTransform.MakeIdentity()
+        photoView.Frame <- RectangleF(
+            x = (content.Frame.Width - photoSize) / 2.0f,
+            y = (content.Frame.Height - photoSize) / 2.0f - 50.0f,
+            width = photoSize, height = photoSize)
+
+    let swipeHandler =
+        let handler = SwipeGestureHandler(content, photoView)
+        handler.TargetViewRemoved.Add <| fun view ->
+            resetPhotoView()
+            content.AddSubview(photoView)
+        handler
 
     override this.ViewDidLoad() =
         this.View <- content
@@ -78,10 +92,7 @@ type ShallowViewController() as this =
         base.ViewWillAppear(animated)
 
         // photoView is controlled by dynamics, so we don't use auto layout
-        photoView.Frame <- RectangleF(
-            x = (content.Frame.Width - photoSize) / 2.0f,
-            y = (content.Frame.Height - photoSize) / 2.0f - 50.0f,
-            width = photoSize, height = photoSize)
+        resetPhotoView()
 
     override this.ShouldAutorotateToInterfaceOrientation(orientation) =
         orientation <> UIInterfaceOrientation.PortraitUpsideDown
