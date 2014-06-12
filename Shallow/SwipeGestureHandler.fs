@@ -5,7 +5,8 @@ open System.Drawing
 
 open MonoTouch.UIKit
 
-// http://stackoverflow.com/questions/21325057/implement-uikitdynamics-for-dragging-view-off-screen
+/// Sets up a Tinder-style swipe gesture for a targetView within a referenceView.
+/// Ported from http://stackoverflow.com/questions/21325057/implement-uikitdynamics-for-dragging-view-off-screen
 type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
     let mutable attachment = None
     let mutable startCenter = PointF.Empty
