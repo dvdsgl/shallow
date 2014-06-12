@@ -10,8 +10,8 @@ open MonoTouch.CoreGraphics
 open Cirrious.FluentLayouts.Touch
 
 [<Register ("ShallowViewController")>]
-type ShallowViewController() as this =
-    inherit UIViewController ()
+type ShallowViewController() =
+    inherit UIViewController()
 
     let photoUrl = "https://dl.dropboxusercontent.com/u/217582/xamarin/shallow/david.jpg"
 
