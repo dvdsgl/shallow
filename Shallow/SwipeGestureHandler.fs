@@ -15,7 +15,6 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
     let mutable angularVelocity = 0.0f
 
     let targetViewRemoved = Event<_>()
-
     let animator = UIDynamicAnimator(referenceView)
 
     let angleOfView (view: #UIView) =
@@ -58,15 +57,13 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
         | UIGestureRecognizerState.Ended, _ ->
             animator.RemoveAllBehaviors()
             let velocity = gesture.VelocityInView(referenceView)
-
-            // if we aren't dragging it down, just snap it back and quit
             let pi = float32 Math.PI
             if abs ((atan2 velocity.Y velocity.X) - pi / 2.0f) > pi / 4.0f then
+                // if we aren't dragging it down, just snap it back and quit
                 animator.AddBehavior(UISnapBehavior(targetView, startCenter))
-
-            // otherwise, create UIDynamicItemBehavior that carries on animation from where
-            // the gesture left off (notably linear and angular velocity)
             else
+                // otherwise, create UIDynamicItemBehavior that carries on animation from where
+                // the gesture left off (notably linear and angular velocity)
                 let dynamic = UIDynamicItemBehavior(targetView, AngularResistance = 2.0f)
                 dynamic.AddLinearVelocityForItem(velocity, targetView)
                 dynamic.AddAngularVelocityForItem(angularVelocity, targetView)
@@ -79,7 +76,7 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
                         targetViewRemoved.Trigger(targetView)
                 
                 animator.AddBehavior(dynamic)
-                // add a little gravity so it accelerates off the screen (in case user gesture was slow)
+                // add gravity so it accelerates off the screen in case gesture was slow
                 animator.AddBehavior(UIGravityBehavior(targetView, Magnitude = 0.7f))
                 targetView.UserInteractionEnabled <- false
 
@@ -87,4 +84,3 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
     do targetView.AddGestureRecognizer(UIPanGestureRecognizer(handlePan))
 
     member this.TargetViewRemoved = targetViewRemoved.Publish
-
