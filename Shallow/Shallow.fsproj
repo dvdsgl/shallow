@@ -135,5 +135,6 @@
     <BundleResource Include="Resources\like-icon%402x.png" />
     <BundleResource Include="Resources\info-icon.png" />
     <BundleResource Include="Resources\info-icon%402x.png" />
+    <BundleResource Include="Resources\Icon-60%402x.png" />
   </ItemGroup>
 </Project>
