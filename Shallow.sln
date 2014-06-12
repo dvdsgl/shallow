@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{4925A630-B079-445d-BCD4-3A9C94FE9307}") = "Shallow", "Shallow\Shallow.fsproj", "{462945D0-C8BD-4570-B382-77C9213DC054}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.FluentLayouts.Touch", "Cirrious.FluentLayout\Cirrious.FluentLayout\Cirrious.FluentLayouts.Touch.csproj", "{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{462945D0-C8BD-4570-B382-77C9213DC054}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{462945D0-C8BD-4570-B382-77C9213DC054}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{462945D0-C8BD-4570-B382-77C9213DC054}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{462945D0-C8BD-4570-B382-77C9213DC054}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{462945D0-C8BD-4570-B382-77C9213DC054}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{462945D0-C8BD-4570-B382-77C9213DC054}.Debug|iPhone.Build.0 = Debug|iPhone
+		{462945D0-C8BD-4570-B382-77C9213DC054}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{462945D0-C8BD-4570-B382-77C9213DC054}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{462945D0-C8BD-4570-B382-77C9213DC054}.Release|iPhone.ActiveCfg = Release|iPhone
+		{462945D0-C8BD-4570-B382-77C9213DC054}.Release|iPhone.Build.0 = Release|iPhone
+		{462945D0-C8BD-4570-B382-77C9213DC054}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{462945D0-C8BD-4570-B382-77C9213DC054}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Release|iPhone.Build.0 = Release|Any CPU
+		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Shallow\Shallow.fsproj
+	EndGlobalSection
+EndGlobal
