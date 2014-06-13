@@ -76,8 +76,6 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
                         targetViewRemoved.Trigger(targetView)
                 
                 animator.AddBehavior(dynamic)
-                // add gravity so it accelerates off the screen in case gesture was slow
-                animator.AddBehavior(UIGravityBehavior(targetView, Magnitude = 0.7f))
                 targetView.UserInteractionEnabled <- false
 
     do targetView.AddGestureRecognizer(UIPanGestureRecognizer(handlePan))
