@@ -57,9 +57,9 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
         | UIGestureRecognizerState.Ended, _ ->
             animator.RemoveAllBehaviors()
             let velocity = gesture.VelocityInView(referenceView)
-            let pi = float32 Math.PI
-            if abs ((atan2 velocity.Y velocity.X) - pi / 2.0f) > pi / 4.0f then
-                // if we aren't dragging it down, just snap it back and quit
+            let magnitude = sqrt (velocity.Y ** 2.0f + velocity.X ** 2.0f)
+            if magnitude < 800.0f then
+                // If we aren't flinging fast, snap back.
                 animator.AddBehavior(UISnapBehavior(targetView, startCenter))
             else
                 // otherwise, create UIDynamicItemBehavior that carries on animation from where
