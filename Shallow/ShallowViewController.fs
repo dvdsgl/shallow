@@ -74,9 +74,9 @@ type ShallowViewController() =
     let popPhotoView () = Async.StartImmediate <| async {
         photoView.Transform <- CGAffineTransform.MakeScale(0.001f, 0.001f)
         do! Async.Sleep 100
-        do! UIView.AnimateAsync'(0.3/1.5, fun () ->
+        do! UIView.AnimateAsync'(0.3 / 1.5, fun () ->
             photoView.Transform <- CGAffineTransform.MakeScale(1.1f, 1.1f))
-        do! UIView.AnimateAsync'(0.3/2.0, fun () ->
+        do! UIView.AnimateAsync'(0.3 / 2.0, fun () ->
             photoView.Transform <- CGAffineTransform.MakeIdentity())
     }
 
