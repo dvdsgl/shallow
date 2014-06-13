@@ -7,6 +7,12 @@ open MonoTouch.Foundation
 
 open Cirrious.FluentLayouts.Touch
 
+type UIView with
+    static member AnimateAsync'(duration: float, animation: unit -> unit) = async {
+        let! b = UIView.AnimateAsync(duration, fun () -> animation()) |> Async.AwaitTask
+        return ()
+    }
+
 type UIImage with
     static member FromUrl(url) =
         url

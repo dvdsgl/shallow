@@ -71,11 +71,21 @@ type ShallowViewController() =
             y = (content.Frame.Height - photoSize) / 2.0f - 50.0f,
             width = photoSize, height = photoSize)
 
+    let popPhotoView () = Async.StartImmediate <| async {
+        photoView.Transform <- CGAffineTransform.MakeScale(0.001f, 0.001f)
+        do! Async.Sleep 100
+        do! UIView.AnimateAsync'(0.3/1.5, fun () ->
+            photoView.Transform <- CGAffineTransform.MakeScale(1.1f, 1.1f))
+        do! UIView.AnimateAsync'(0.3/2.0, fun () ->
+            photoView.Transform <- CGAffineTransform.MakeIdentity())
+    }
+
     let swipeHandler =
         let handler = SwipeGestureHandler(content, photoView)
         handler.TargetViewRemoved.Add <| fun view ->
             resetPhotoView()
             content.AddSubview(photoView)
+            popPhotoView()
         handler
 
     override this.ViewDidLoad() =
