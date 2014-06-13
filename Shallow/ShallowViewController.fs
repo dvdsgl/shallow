@@ -24,12 +24,11 @@ type ShallowViewController() =
     ]
 
     let nextPhoto =
-        let current = ref 0
+        let urls = (Seq.cycle photos).GetEnumerator()
         let getImage = memoize UIImage.FromUrl
         async {
-            let url = photos.[!current]
-            current := (!current + 1) % photos.Length
-            return getImage url
+            urls.MoveNext()
+            return getImage urls.Current
         }
 
     let photoSize = 300.0f

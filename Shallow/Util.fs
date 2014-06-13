@@ -4,6 +4,12 @@ module Shallow.Util
 open System
 open System.Collections.Generic
 
+module Seq =
+    let rec cycle xs = seq {
+        yield! xs
+        yield! cycle xs
+    }
+
 type Dictionary<'Key, 'Value> with
     member this.MaybeGet(k) =
         match this.TryGetValue(k) with
