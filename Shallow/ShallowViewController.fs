@@ -27,8 +27,8 @@ type ShallowViewController() =
         let cache = Dictionary<string, UIImage>()
         let current = ref 0
         async {
-            current := (!current + 1) % photos.Length
             let url = photos.[!current]
+            current := (!current + 1) % photos.Length
             match cache.TryGetValue(url) with
             | true, image -> return image
             | false, _ ->
