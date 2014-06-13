@@ -11,7 +11,7 @@ type Dictionary<'Key, 'Value> with
         | _ -> None
 
 let memoize f x =
-    let cache = Dictionary<_,_>()
+    let cache = Dictionary<_,_>(HashIdentity.Structural)
     match cache.MaybeGet(x) with
     | Some y -> y
     | None ->
