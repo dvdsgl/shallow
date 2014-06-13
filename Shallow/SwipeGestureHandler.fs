@@ -51,7 +51,7 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
                 Some attach
 
         | UIGestureRecognizerState.Changed, Some attachment ->
-            // as user makes gesture, update attachment behavior's anchor point, achieving drag 'n' rotate
+            // During pan, update the attachment behavior's anchor point for drag-n-rotate effect.
             attachment.AnchorPoint <- gesture.LocationInView(referenceView)
 
         | UIGestureRecognizerState.Ended, _ ->
@@ -62,13 +62,12 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
                 // If we aren't flinging fast, snap back.
                 animator.AddBehavior(UISnapBehavior(targetView, startCenter))
             else
-                // otherwise, create UIDynamicItemBehavior that carries on animation from where
-                // the gesture left off (notably linear and angular velocity)
+                // Otherwise, continue the fling until the view leaves the referenceView.
                 let dynamic = UIDynamicItemBehavior(targetView, AngularResistance = 2.0f)
                 dynamic.AddLinearVelocityForItem(velocity, targetView)
                 dynamic.AddAngularVelocityForItem(angularVelocity, targetView)
 
-                // when the view no longer intersects with its superview, go ahead and remove it
+                // Remove the view when it leaves the referenceView
                 dynamic.Action <- fun () ->
                     if not (referenceView.Bounds.IntersectsWith(targetView.Frame)) then
                         animator.RemoveAllBehaviors()
