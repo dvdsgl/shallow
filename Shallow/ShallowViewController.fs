@@ -11,7 +11,7 @@ open MonoTouch.CoreGraphics
 
 open Cirrious.FluentLayouts.Touch
 
-[<Register ("ShallowViewController")>]
+[<Register("ShallowViewController")>]
 type ShallowViewController() =
     inherit UIViewController()
 
