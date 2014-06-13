@@ -24,17 +24,12 @@ type ShallowViewController() =
     ]
 
     let nextPhoto =
-        let cache = Dictionary<string, UIImage>()
         let current = ref 0
+        let getImage = memoize UIImage.FromUrl
         async {
             let url = photos.[!current]
             current := (!current + 1) % photos.Length
-            match cache.TryGetValue(url) with
-            | true, image -> return image
-            | false, _ ->
-                let image = UIImage.FromUrl(url)
-                cache.[url] <- image
-                return image
+            return getImage url
         }
 
     let photoSize = 300.0f

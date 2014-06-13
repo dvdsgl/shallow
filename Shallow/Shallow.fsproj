@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UIKitExtensions.fs" />
+    <Compile Include="Util.fs" />
     <Compile Include="RoundButton.fs" />
     <Compile Include="ShootOutAnimator.fs" />
     <Compile Include="SwipeGestureHandler.fs" />
