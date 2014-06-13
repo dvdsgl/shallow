@@ -8,8 +8,9 @@ open MonoTouch.Foundation
 open Cirrious.FluentLayouts.Touch
 
 type UIView with
+    /// Similar to UIView.AnimateAsync, but returns async rather than Task.
     static member AnimateAsync'(duration: float, animation: unit -> unit) = async {
-        let! b = UIView.AnimateAsync(duration, fun () -> animation()) |> Async.AwaitTask
+        let! _ = UIView.AnimateAsync(duration, fun () -> animation()) |> Async.AwaitTask
         return ()
     }
 
