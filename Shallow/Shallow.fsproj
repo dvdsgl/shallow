@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{4925A630-B079-445D-BCD4-3A9C94FE9307}</ProjectTypeGuids>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{F2A71F9B-5D33-465A-A702-920D77279786}</ProjectTypeGuids>
     <ProjectGuid>{462945D0-C8BD-4570-B382-77C9213DC054}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Shallow</RootNamespace>
@@ -117,6 +117,7 @@
   <ItemGroup>
     <Compile Include="UIKitExtensions.fs" />
     <Compile Include="RoundButton.fs" />
+    <Compile Include="ShootOutAnimator.fs" />
     <Compile Include="SwipeGestureHandler.fs" />
     <Compile Include="ShallowViewController.fs" />
     <Compile Include="AppDelegate.fs" />

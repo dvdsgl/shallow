@@ -88,6 +88,16 @@ type ShallowViewController() =
             popPhotoView()
         handler
 
+    let shooter =
+        let s = ShootOutAnimator(content)
+        noButton.TouchUpInside.Add <| fun _ -> s.ShootOut(photoView, West)
+        yesButton.TouchUpInside.Add <| fun _ -> s.ShootOut(photoView, East)
+        s.ViewShotOut.Add <| fun _ ->
+            resetPhotoView()
+            content.AddSubview(photoView)
+            popPhotoView()
+        s
+
     override this.ViewDidLoad() =
         this.View <- content
         photoView.ImageAsync <- async { return UIImage.FromUrl(photoUrl) }
