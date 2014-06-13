@@ -2,6 +2,7 @@
 
 open System
 open System.Drawing
+open System.Collections.Generic
 
 open MonoTouch.UIKit
 
@@ -14,11 +15,31 @@ open Cirrious.FluentLayouts.Touch
 type ShallowViewController() =
     inherit UIViewController()
 
-    let photoUrl = "https://dl.dropboxusercontent.com/u/217582/xamarin/shallow/david.jpg"
+    let showCodeUrl = "https://github.com/dvdsgl/shallow/blob/master/Shallow/ShallowViewController.fs"
+    let photos = [
+        "https://raw.githubusercontent.com/dvdsgl/shallow/master/data/photos/anuj.jpg"
+        "https://raw.githubusercontent.com/dvdsgl/shallow/master/data/photos/julia.jpg"
+        "https://raw.githubusercontent.com/dvdsgl/shallow/master/data/photos/kai.jpg"
+        "https://raw.githubusercontent.com/dvdsgl/shallow/master/data/photos/karina.jpg"
+    ]
+
+    let nextPhoto =
+        let cache = Dictionary<string, UIImage>()
+        let current = ref 0
+        async {
+            current := (!current + 1) % photos.Length
+            let url = photos.[!current]
+            match cache.TryGetValue(url) with
+            | true, image -> return image
+            | false, _ ->
+                let image = UIImage.FromUrl(url)
+                cache.[url] <- image
+                return image
+        }
 
     let photoSize = 300.0f
     let mainButtonSize = 75.0f
-    let infoButtonSize = 35.0f
+    let infoButtonSize = 45.0f
     let buttonBetweenSpacing = 5.0f
     let buttonBottomSpacing = 50.0f
 
@@ -29,10 +50,19 @@ type ShallowViewController() =
             TranslatesAutoresizingMaskIntoConstraints = false)
         button.SetImage(UIImage.FromBundle(image), UIControlState.Normal)
         button
-
+    
     let yesButton = roundButton mainButtonSize "like-icon.png" 4.0f
     let noButton = roundButton mainButtonSize "nope-icon.png" 1.0f
-    let infoButton = roundButton infoButtonSize "info-icon.png" 1.0f
+    let infoButton =
+        let button = roundButton infoButtonSize "info-icon.png" 1.0f
+        button.TouchUpInside.Add <| fun _ ->
+            let alert = UIAlertView("Hello, F#!", "This lovely little app was written in F# with Xamarin.", null, "Cool", "👀 Code")
+            alert.Clicked.Add <| fun args ->
+                if args.ButtonIndex = 1 then
+                    UIApplication.SharedApplication.OpenUrl(NSUrl(showCodeUrl))
+                    ()
+            alert.Show()
+        button
 
     let photoView =
         let view = UIImageView(
@@ -64,6 +94,7 @@ type ShallowViewController() =
         view
 
     let resetPhotoView () =
+        photoView.ImageAsync <- nextPhoto
         photoView.UserInteractionEnabled <- true
         photoView.Transform <- CGAffineTransform.MakeIdentity()
         photoView.Frame <- RectangleF(
@@ -100,12 +131,9 @@ type ShallowViewController() =
 
     override this.ViewDidLoad() =
         this.View <- content
-        photoView.ImageAsync <- async { return UIImage.FromUrl(photoUrl) }
 
     override this.ViewWillAppear(animated: bool) =
         base.ViewWillAppear(animated)
-
-        // photoView is controlled by dynamics, so we don't use auto layout
         resetPhotoView()
 
     override this.ShouldAutorotateToInterfaceOrientation(orientation) =
