@@ -76,6 +76,7 @@ type SwipeGestureHandler(referenceView: UIView, targetView: UIView) =
                 
                 animator.AddBehavior(dynamic)
                 targetView.UserInteractionEnabled <- false
+        | _ -> ()
 
     do targetView.AddGestureRecognizer(UIPanGestureRecognizer(handlePan))
 
