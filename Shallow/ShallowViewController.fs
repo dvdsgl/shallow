@@ -115,8 +115,8 @@ type ShallowViewController() =
 
     let shooter =
         let s = ShootOutAnimator(content)
-        noButton.TouchUpInside.Add <| fun _ -> s.ShootOut(photoView, West)
-        yesButton.TouchUpInside.Add <| fun _ -> s.ShootOut(photoView, East)
+        for button, direction in [noButton, Left; yesButton, Right] do
+            button.TouchUpInside.Add <| fun _ -> s.ShootOut(photoView, direction)
         s.ViewShotOut.Add <| fun _ ->
             resetPhotoView()
             content.AddSubview(photoView)

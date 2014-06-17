@@ -6,14 +6,14 @@ open System.Drawing
 open MonoTouch.UIKit
 
 type Direction =
-    North | East | South | West
+    Up | Down | Left | Right
 
     member this.UnitVector =
         match this with
-        | North -> (0.0f, 1.0f)
-        | South -> (0.0f, -1.0f)
-        | West -> (-1.0f, 0.0f)
-        | East -> (1.0f, 0.0f)
+        | Up -> (0.0f, 1.0f)
+        | Down -> (0.0f, -1.0f)
+        | Left -> (-1.0f, 0.0f)
+        | Right -> (1.0f, 0.0f)
 
 type ShootOutAnimator(referenceView: UIView) =
     let speed = 1300.0f
