@@ -24,12 +24,12 @@ type ShootOutAnimator(referenceView: UIView) =
 
     member this.ShootOut(view: UIView, direction: Direction) =
         let x, y = direction.UnitVector
-        let dynamic = UIDynamicItemBehavior(view, AngularResistance = 2.0f)
-        dynamic.AddLinearVelocityForItem(PointF(x * speed, y * speed), view)
-        dynamic.AddAngularVelocityForItem(x * 3.0f, view)
-        dynamic.Action <- fun () ->
+        let shoot = UIDynamicItemBehavior(view, AngularResistance = 2.0f)
+        shoot.AddLinearVelocityForItem(PointF(x * speed, y * speed), view)
+        shoot.AddAngularVelocityForItem(x * 3.0f, view)
+        shoot.Action <- fun () ->
             if not (referenceView.Bounds.IntersectsWith(view.Frame)) then
                 animator.RemoveAllBehaviors()
                 view.RemoveFromSuperview()
                 shotOut.Trigger(view)
-        animator.AddBehavior(dynamic)
+        animator.AddBehavior(shoot)
