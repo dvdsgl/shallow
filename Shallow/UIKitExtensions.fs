@@ -14,6 +14,12 @@ type UIView with
         return ()
     }
 
+    member this.ConfigureBorder(?color: UIColor, ?width: float, ?radius: float) =
+        let layer = this.Layer
+        color |> Option.iter (fun color -> layer.BorderColor <- color.CGColor)
+        width |> Option.iter (fun width -> layer.BorderWidth <- float32 width)
+        radius |> Option.iter (fun radius -> layer.CornerRadius <- float32 radius)
+
 type UIImage with
     static member FromUrl(url) =
         url

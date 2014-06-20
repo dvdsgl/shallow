@@ -7,8 +7,7 @@ type RoundButton(size) as this =
     inherit UIButton(UIButtonType.Custom)
 
     do
-        this.Layer.BorderWidth <- 1.0f
-        this.Layer.BorderColor <- UIColor.Gray.CGColor
+        this.ConfigureBorder(width = 0.5, color = UIColor.Gray)
         this.Radius <- size / 2.0f
 
     member this.Radius with
