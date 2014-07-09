@@ -9,7 +9,7 @@ open MonoTouch.UIKit
 open MonoTouch.Foundation
 open MonoTouch.CoreGraphics
 
-open Cirrious.FluentLayouts.Touch
+open EasyLayout
 
 [<Register("ShallowViewController")>]
 type ShallowViewController() =
@@ -40,8 +40,7 @@ type ShallowViewController() =
     let roundButton size image inset =
         let button = RoundButton(
             size,
-            ImageEdgeInsets = UIEdgeInsets(inset, 0.0f, 0.0f, 0.0f),
-            TranslatesAutoresizingMaskIntoConstraints = false)
+            ImageEdgeInsets = UIEdgeInsets(inset, 0.0f, 0.0f, 0.0f))
         button.SetImage(UIImage.FromBundle(image), UIControlState.Normal)
         button
     
@@ -69,22 +68,22 @@ type ShallowViewController() =
         let view = UIView(BackgroundColor = UIColor.White)
 
         view.AddSubviews(yesButton, noButton, infoButton, photoView)
-        view.AddConstraints [|
-            infoButton.Width().EqualTo(infoButtonSize)
-            infoButton.Height().EqualTo(infoButtonSize)
-            infoButton.WithSameBottom(view).Minus(buttonBottomSpacing)
-            infoButton.WithSameCenterX(view)
+        view.ConstrainLayout <@[|
+            infoButton.Frame.Width = infoButtonSize
+            infoButton.Frame.Height = infoButtonSize
+            infoButton.Frame.Bottom = view.Frame.Bottom - buttonBottomSpacing
+            infoButton.Frame.CenterX = view.Frame.CenterX
 
-            yesButton.Width().EqualTo(mainButtonSize)
-            yesButton.Height().EqualTo(mainButtonSize)
-            yesButton.WithSameCenterY(infoButton)
-            yesButton.ToRightOf(infoButton, buttonBetweenSpacing)
+            yesButton.Frame.Width = mainButtonSize
+            yesButton.Frame.Height = mainButtonSize
+            yesButton.Frame.CenterY = infoButton.Frame.CenterY
+            yesButton.Frame.Left = infoButton.Frame.Right + buttonBetweenSpacing
 
-            noButton.Width().EqualTo(mainButtonSize)
-            noButton.Height().EqualTo(mainButtonSize)
-            noButton.WithSameCenterY(infoButton)
-            noButton.ToLeftOf(infoButton, buttonBetweenSpacing)
-        |]
+            noButton.Frame.Width = mainButtonSize
+            noButton.Frame.Height = mainButtonSize
+            noButton.Frame.CenterY = infoButton.Frame.CenterY
+            noButton.Frame.Right = infoButton.Frame.Left - buttonBetweenSpacing
+        |]@>
         view
 
     let resetPhotoView () =

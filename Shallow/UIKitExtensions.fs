@@ -5,7 +5,7 @@ open System.Drawing
 open MonoTouch.UIKit
 open MonoTouch.Foundation
 
-open Cirrious.FluentLayouts.Touch
+open EasyLayout
 
 type UIView with
     /// Similar to UIView.AnimateAsync, but returns async rather than Task.
@@ -31,10 +31,12 @@ type UIImageView with
     /// Adds a spinning spinner to the middle of the view
     member private this.DisplaySpinner () =
         let spinner = UIActivityIndicatorView(
-            UIActivityIndicatorViewStyle.Gray,
-            TranslatesAutoresizingMaskIntoConstraints = false)
+            UIActivityIndicatorViewStyle.Gray)
         this.Add(spinner)
-        this.AddConstraints(spinner.WithSameCenterX(this), spinner.WithSameCenterY(this))
+        this.ConstrainLayout <@[|
+            spinner.Frame.CenterX = this.Frame.CenterX
+            spinner.Frame.CenterY = this.Frame.CenterY
+        |]@>
         spinner.StartAnimating()
         spinner
 

@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{4925A630-B079-445d-BCD4-3A9C94FE9307}") = "Shallow", "Shallow\Shallow.fsproj", "{462945D0-C8BD-4570-B382-77C9213DC054}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.FluentLayouts.Touch", "Cirrious.FluentLayout\Cirrious.FluentLayout\Cirrious.FluentLayouts.Touch.csproj", "{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Shallow", "Shallow\Shallow.fsproj", "{462945D0-C8BD-4570-B382-77C9213DC054}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,18 +25,6 @@ Global
 		{462945D0-C8BD-4570-B382-77C9213DC054}.Release|iPhone.Build.0 = Release|iPhone
 		{462945D0-C8BD-4570-B382-77C9213DC054}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{462945D0-C8BD-4570-B382-77C9213DC054}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
-		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.AppStore|iPhone.Build.0 = Release|Any CPU
-		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Release|iPhone.Build.0 = Release|Any CPU
-		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Shallow\Shallow.fsproj

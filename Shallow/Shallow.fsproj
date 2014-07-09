@@ -115,6 +115,7 @@
     <None Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EasyLayout.fs" />
     <Compile Include="UIKitExtensions.fs" />
     <Compile Include="Util.fs" />
     <Compile Include="RoundButton.fs" />
@@ -124,12 +125,6 @@
     <Compile Include="AppDelegate.fs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\Cirrious.FluentLayout\Cirrious.FluentLayout\Cirrious.FluentLayouts.Touch.csproj">
-      <Project>{75D2DA9D-DFD4-49A1-98FB-FE0F0677EF0F}</Project>
-      <Name>Cirrious.FluentLayouts.Touch</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <BundleResource Include="Resources\nope-icon%402x.png" />
