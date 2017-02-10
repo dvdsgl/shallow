@@ -1,7 +1,7 @@
 Shallow
 =======
 
-![](https://dl.dropboxusercontent.com/u/217582/xamarin/shallow/shallow.gif)
+![](shallow.gif)
 
 ### About
 
